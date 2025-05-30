@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  background-color: #eee;
+  padding: 20px;
+}
+
+.buttons {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #f0f0f0;
+}
+
+.toasts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-right: 20px;
+  gap: 10px;
+  position: relative;
+}
+
+.toast {
+  background-color: white;
+  color: #333;
+  padding: 15px 20px;
+  min-width: 250px;
+  border-left: 6px solid;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+.toast.success { border-color: #28a745; }
+.toast.error   { border-color: #dc3545; }
+.toast.invalid { border-color: #ffc107; }
+
+.toast .message {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.toast .close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  background: none;
+  border: none;
+}
+
+.toast .progress {
+  height: 4px;
+  width: 100%;
+  background-color: #ccc;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.toast .progress-bar {
+  height: 100%;
+  background-color: #28a745;
+  animation: fillBar 5s linear forwards;
+}
+
+.toast.error .progress-bar {
+  background-color: #dc3545;
+}
+
+.toast.invalid .progress-bar {
+  background-color: #ffc107;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fillBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
