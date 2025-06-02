@@ -21,14 +21,41 @@ main{
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .images{
   display: flex;
   width: 840px;
   overflow-x: scroll;
+  gap: 0px; 
 }
 .images img{
   width: 280px;
+  filter: grayscale(1);
+  transform: scale(0.8);
+  transition: 0.5s ease-in-out;
+}
+
+.images img:hover{
+  filter: grayscale(0);
+  transform: scale(1);
   
+}
+
+.images::-webkit-scrollbar{
+  display: none;
+}
+
+.back-btn, .next-btn{
+  padding: 25px 20px;
+  cursor: pointer;
+  background-color: rgb(187, 66, 66);
+  color: white;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+}
+
+.back-btn:hover, .next-btn:hover{
+  transform: scale(1.2);
 }
