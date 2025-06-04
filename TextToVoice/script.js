@@ -12,9 +12,21 @@ window.speechSynthesis.onvoiceschanged = () =>{
 
 voiceSelect.addEventListener('change', ()=>{
     speech.voice = voices[voiceSelect.value]
+    console.log(voiceSelect.value)
 })
 
 document.querySelector('button').addEventListener('click',()=>{
     speech.text = document.querySelector('textarea').value
+    if(window.speechSynthesis.paused)
+        return window.speechSynthesis.resume()
+    
     window.speechSynthesis.speak(speech)
 })
+
+document.querySelector('.pauseButton').addEventListener('click',()=>{
+    window.speechSynthesis.pause()
+})
+
+const madeUpArray = ['apple','banana','orange']
+
+
