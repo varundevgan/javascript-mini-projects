@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    height: 100vh;
+    max-width: 968px;
+    width: 90%;
+    background-color: antiquewhite;
+    margin: 0 auto;
+}
+
+.columns{
+    display: flex;
+    margin-top: 6em;
+    gap: 2em;
+}
+
+.one{
+    width: 25%;
+}
+
+.two{
+    width: 50%;
+}
+
+.three{
+    width: 75%;
+}
+
+.bg{
+    background-color: brown;
+}   
+
