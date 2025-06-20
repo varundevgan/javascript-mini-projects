@@ -5,10 +5,14 @@ const apiKey = '9c39355ad111403a8922c011a2c1d562'
 const apiUrl = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${apiKey}`
 let articles = []
 let count = 1;
+let buttonClicked = false;
+let loadData;
 
 
 window.addEventListener('load',()=>{
     count = 1
+    document.querySelector('.loader').style.display = 'flex'
+    document.querySelector('.main-container').style.display = 'none'
     fetchNewsContent(elements)
 })
 
@@ -18,6 +22,7 @@ async function fetchNewsContent(elements){
         const res = await fetch(`${apiUrl}`)
         if(res.ok){
             const data = await res.json()
+            loadData = data
             articles = data.articles.slice(0,elements)
             return articles
         }
@@ -26,10 +31,18 @@ async function fetchNewsContent(elements){
         return []
     }finally{
         createCards(articles)
+        console.log(elements)
+        if(loadData.articles.length > elements)
+        document.querySelector('.footer-loader').style.display='flex'
+        else
+        document.querySelector('.footer-loader').style.display='none'
+
     }
 }
 
 function createCards(articles){
+    document.querySelector('.loader').style.display = 'none'
+    document.querySelector('.main-container').style.display = 'flex'
     cards.innerHTML = ''
     articles.forEach(element => {
         const div = document.createElement('div')
@@ -45,6 +58,9 @@ function createCards(articles){
 }
 
 document.querySelector('#search-button').addEventListener('click', async ()=>{
+   buttonClicked = true
+   document.querySelector('.loader').style.display = 'flex'
+   document.querySelector('.main-container').style.display = 'none'
    specificNews(elements)
 })
 
@@ -63,14 +79,18 @@ async function specificNews(elements){
         }
         finally{
             createCards(response)
+            document.querySelector('.footer-loader').style.display='flex'
         }
     }
 }
 
 window.addEventListener('scroll', (e)=>{
-    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
+    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && buttonClicked){
         count++
         specificNews(12 * count)    
+    }else if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && !buttonClicked){
+       count++
+       fetchNewsContent(12 * count) 
     }
     
 })
@@ -78,22 +98,29 @@ window.addEventListener('scroll', (e)=>{
 
 
 
-let increment = 0
+// let increment = 0
 
-let incrementCount = (amount) => {
-    console.log(increment += amount);
-}
+// let incrementCount = (amount) => {
+//     console.log(increment += amount);
+// }
 
-const debounce = (fn, delay) => {
-    let timer
-    return function(...args){
-        clearTimeout(timer)
-        timer = setTimeout(()=>{
-            fn(...args)
-        },delay)
-    }
-}
+// const debounce = (fn, delay) => {
+//     let timer
+//     return function(...args){
+//         clearTimeout(timer)
+//         timer = setTimeout(()=>{
+//             fn(...args)
+//         },delay)
+//     }
+// }
 
-incrementCount = debounce(incrementCount, 500)
+// incrementCount = debounce(incrementCount, 500)
 
-window.addEventListener('scroll', () => incrementCount(5))
+// window.addEventListener('scroll', () => incrementCount(5))
+
+// function checkOne(){
+//     console.log("one")
+// }
+// function checkTwo(){
+//     console.log("two")
+// }
